@@ -1,4 +1,6 @@
-a, b = map(int, input().split())
-while 1:
-    print(a+b)
-    a, b = map(int, input().split())
+while True:
+    try:
+        a, b = map(int, input().split())
+        print(a+b)
+    except:
+        break
