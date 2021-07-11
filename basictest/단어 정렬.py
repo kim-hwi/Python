@@ -6,7 +6,9 @@ for i in range(testcase):
         continue
     else:
         arr[i] = temp
+arr.sort()
 arr.sort(key=len)
+
 for i in range(testcase):
     if arr[i] !=' ':
         print(arr[i])
