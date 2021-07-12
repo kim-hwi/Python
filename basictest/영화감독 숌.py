@@ -6,7 +6,4 @@ while testcase > count:
     temp = str(num)
     if "666" in temp:
         count+=1    
-   
-
-    
 print(num)
