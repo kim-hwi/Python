@@ -1,9 +1,10 @@
+import sys
 case = int(input())
 arr = [0 for i in range(case)]
 arr2 = [0 for i in range(case)]
 ma = 0
 for i in range(case):
-    temp = int(input())
+    temp = int(sys.stdin.readline())
     if temp in arr:
         arr2[arr.index(temp)]+=1
     arr[i] = temp
