@@ -1,8 +1,8 @@
 K,N = map(int,input().split())
 arr = [int(input()) for i in range(K)]
-last = min(arr)
+last = max(arr)
 first = 1
-mid = 0
+mid = int((last+first)/2)
 Fea = 1
 Mea = 1
 Lea = 1
@@ -20,21 +20,29 @@ while(True):
     for i in range(K):
         Lea += int(arr[i]/last)
     # arr[0] = max(Fea,Mea,Lea)
-    print(first, mid, last, Fea, Mea, Lea)
+    # print(first, mid, last, Fea, Mea, Lea)
+    if last == mid or mid == first:
+        break
     if Mea < N:
         last = mid
     if Mea >= N: 
         first = mid   
     
-    print(first, mid, last, Fea, Mea, Lea)
-    if Fea == Mea or Mea == Lea:
-        break
-temp = max(Fea,Mea,Lea)
-if temp == Fea:
-    print(first)
-if temp == Mea:
-    print(mid)
-if temp == Lea:
+    # print(first, mid, last, Fea, Mea, Lea)
+    
+if Lea >= N:
     print(last)
-print(int((first+last+mid)/3))
+elif Mea >= N:
+    print(mid)
+else: 
+    print(first)
+
+# temp = max(Fea,Mea,Lea)
+# if temp == Fea:
+#     print(first)
+# if temp == Mea:
+#     print(mid)
+# if temp == Lea:
+#     print(last)
+# print(int((first+last+mid)/3))
 # print(int(7/2))
