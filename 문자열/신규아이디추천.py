@@ -10,7 +10,7 @@ def solution(id):
         elif ord(i) < 90 and ord(i) > 64:
             i = chr(ord(i)+32)
             newid += i
-        elif ((ord(i) > 48 and ord(i) < 57) or (ord(i) > 97 and ord(i) < 122) or ord(i) == 45 or ord(i) == 95 or ord(i) == 46):
+        elif ((ord(i) >= 48 and ord(i) <= 57) or (ord(i) >= 97 and ord(i) <= 122) or ord(i) == 45 or ord(i) == 95 or ord(i) == 46):
             if(ord(i) == 46 and len(newid) > 0):
                 if newid[-1] == '.':
                     continue
