@@ -30,11 +30,11 @@ for test_case in range(1, T + 1):
     ans = []
     for rotate in range(num):
         for i in range(4):
-            ans.append(''.join(arr[i*num:i*num+num]))
-        arr.insert(0, arr.pop())
-    ans = set(ans)
+            ans.append(''.join(arr[i*num:i*num+num]))#join 을 사용하여 list의 string을 가져옴 
+        arr.insert(0, arr.pop())#insert를 사용하여 0번째에 마지막 값을 입력
+    ans = set(ans)#set을 이용하여 중복을제거
     res = sorted(ans, reverse=True)
-    print('#', test_case, ' ', int(str(res[K-1]), 16), sep='')
+    print('#', test_case, ' ', int(str(res[K-1]), 16), sep='')#int(str,16)을 이용하여 16진수로 변경
     
     # print(ans)
 
