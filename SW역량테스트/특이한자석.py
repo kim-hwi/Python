@@ -1,47 +1,64 @@
 def ROT(num, whe):
-    if num > 2:
+    if num == 3:
         if whe == 1:
-            if mag[num][6] != mag[num-1][3] and vis[num-1] != 0:
+            
+            if mag[num][6] != mag[num-1][2] and vis[num-1] == 0:
+                vis[num] = 1
                 ROT(num-1, -1)
             vis[num] = 1
-            temparr[num].insert(0, mag[num].pop())
+            temp = mag[num]
+            temparr[num].insert(0, temp.pop())
         
         else:
-            if mag[num][6] != mag[num-1][3] and vis[num-1] != 0:
+            if mag[num][6] != mag[num-1][2] and vis[num-1] == 0:
+                vis[num] = 1
                 ROT(num-1, 1)
             vis[num] = 1
-            temparr[num].insert(-1, mag[num].pop(0))
+            temp = mag[num]
+            temparr[num].append(temp.pop(0))
         return
     
-    if num < 1:
+    if num == 0:
         if whe == 1:
-            if mag[num][2] != mag[num+1][6] and vis[num+1] != 0:
+            
+            if mag[num][2] != mag[num+1][6] and vis[num+1] == 0:
+                vis[num] = 1
                 ROT(num+1, -1)
             vis[num] = 1
-            temparr[num].insert(0, mag[num].pop())
+            temp = mag[num]
+            temparr[num].insert(0, temp.pop())
         
         else:
-            if mag[num][2] != mag[num+1][6] and vis[num+1] != 0:
+            if mag[num][2] != mag[num+1][6] and vis[num+1] == 0:
+                vis[num] = 1
                 ROT(num+1, 1)
             vis[num] = 1
-            temparr[num].insert(-1, mag[num].pop(0))
+            temp = mag[num]
+            temparr[num].append(temp.pop(0))
         return
     
     if whe == 1:
-        if mag[num][2] != mag[num+1][6] and vis[num+1] != 0:
+        if mag[num][2] != mag[num+1][6] and vis[num+1] == 0:
+            vis[num] = 1
             ROT(num+1, -1)
-        if mag[num][6] != mag[num-1][3] and vis[num-1] != 0:
+        if mag[num][6] != mag[num-1][2] and vis[num-1] == 0:
+            vis[num] = 1
+            
             ROT(num-1, -1)
         vis[num] = 1
-        temparr[num].insert(0, mag[num].pop())
+        temp = mag[num]
+        temparr[num].insert(0, temp.pop())
+    
     else:
-        if mag[num][2] != mag[num+1][6] and vis[num+1] != 0:
+        if mag[num][2] != mag[num+1][6] and vis[num+1] == 0:
+            vis[num] = 1
             ROT(num+1, 1)
-        if mag[num][6] != mag[num-1][3] and vis[num-1] != 0:
+        if mag[num][6] != mag[num-1][2] and vis[num-1] == 0:
+            vis[num] = 1
             ROT(num-1, 1)
         vis[num] = 1
-        
-        temparr[num].insert(-1, mag[num].pop(0))
+        temp = mag[num]
+        temparr[num].append(temp.pop(0))
         
 
 
@@ -56,9 +73,14 @@ for test_case in range(1, T + 1):
     temparr = mag
     for rot in rotate:
         vis = [0, 0, 0, 0]
-        
+        # print(int(rot[0])-1, int(rot[1]))
         ROT(int(rot[0])-1,int(rot[1]))
         mag = temparr
-        print(mag)
-            
-
+        # print(mag)
+    for i in range(4):
+        
+        if mag[i][0] == str(1):
+            score+=2**i
+    # 
+    print('#',test_case,' ',score,sep='')
+    
