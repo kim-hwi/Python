@@ -69,6 +69,3 @@ for test in range(1, T + 1):
                 ans+=1
 
     print('#',test,' ',ans,sep='')
-
-
-
