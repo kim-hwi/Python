@@ -1,31 +1,37 @@
+
+import itertools
+from collections import Counter
+
+
 def solution(orders, course):
-    intersection = []
+    res = []
     answer = []
-    orders.sort(key=len)
-    print(orders)
-    for i in range(len(orders)):
-        for j in range(i+1, len(orders)):
-            intersection.append(list(set(orders[i]) & set(orders[j])))
-    for j in course:
-        for i in intersection:
-            i.sort()
-            if len(i) == j:
-                temp = ''
-                for k in range(len(i)):
-                    temp += str(str(i[k]))
-                answer.append(temp)
-                print(answer)
-    answer = list(set(answer))
-    answer.sort(key=len)
-    temp = []
-    for i in answer:
-        temp = []
-        count = 0
-        for k in orders:
-            if list(set(i) & set(k)) != []:
-                count += 1
-        temp.append([i, count])
+    for i in course:
+        lis = {}
+        for j in range(len(orders)):
+            if len(orders[j]) < i:
+                continue
+            arr = sorted(
+                list(map(''.join, itertools.combinations(sorted(orders[j]), i))))
+            for ar in arr:
+                if ar in lis:
+                    lis[ar] = lis[ar]+1
+                else:
+                    lis[ar] = 1
+            # print(lis)
+        maxnum = 1
+        for li in lis.items():
+            maxnum = max(li[1], maxnum)
 
-    print('temp', temp)
+        if maxnum >= 2:
+            for li in lis.items():
+                if maxnum == li[1]:
+                    res.append(li[0])
 
-    return answer
+        # counter = Counter(lis)
+        # print(counter)
+        # if len(counter) != 0 and max(counter.values()) != 1:
+        #     if max(counter.values())==maxnum:
+        #         answer += [f for f in counter if counter[f] == max(counter.values())]
+
+    return sorted(res)
