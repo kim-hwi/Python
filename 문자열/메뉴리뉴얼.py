@@ -28,10 +28,6 @@ def solution(orders, course):
                 if maxnum == li[1]:
                     res.append(li[0])
 
-        # counter = Counter(lis)
-        # print(counter)
-        # if len(counter) != 0 and max(counter.values()) != 1:
-        #     if max(counter.values())==maxnum:
-        #         answer += [f for f in counter if counter[f] == max(counter.values())]
+        
 
     return sorted(res)
