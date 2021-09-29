@@ -1,68 +1,66 @@
-t= int(input())
-ans=[]
+import copy
+from collections import deque
 
-def dfs (board2,N):
-    global w
-    res=0
-    if N==0:
-        # print(board2)
-        for i in range(w):
-            res+=sum(board2[i])
-        ans.append(res)
-        return
-    tar=-1
-    print(N)
-    for i in range(w):
-        board=board2.copy()
-        # board = [[0, 1, 1, 1, 1, 1, 1, 1, 1, 1], [0, 0, 0, 1, 1, 1, 1, 1, 1, 1], [0, 1, 3, 1, 4, 4, 5, 6, 1, 7], [0, 0, 0, 0, 0, 1, 1, 1, 1, 1], [0, 1, 1, 1, 1, 1, 1, 1, 1, 1], [
-        #     0, 0, 1, 2, 1, 1, 1, 1, 1, 1], [0, 0, 0, 0, 0, 2, 1, 1, 1, 1], [0, 0, 0, 0, 0, 1, 2, 1, 1, 1], [0, 0, 0, 0, 1, 1, 1, 2, 1, 1], [0, 0, 1, 9, 1, 1, 1, 1, 5, 1]]
-        # if N == 3:
-        
-        for j in range(len(board2[i])):
-            
-            if board2[i][j] != 0 and j < len(board2[i]):    
-                
-                
-                for k in range(len(board[i])):
-                    if board[i][k]>0:
-                        board[i][k]=board[i][k]-1
-                    if board[i][k]<=0:
-                        board[i].pop(k)
-                        board[i].insert(0,0)
-                for k in range(w):
-                    if k==i:
-                        continue
-                    if board[k][j] > 0:
-                        board[k][j] = board[k][j]-1
-                    if board[k][j] <= 0:
-                        board[k].pop(j)
-                        board[k].insert(0, 0)
-                print(i,j, N,board)
-                print()
-                board4=board.copy()
-                dfs(board4, N-1)
-                break
-                
+dix = [0,1,0,-1]
+diy = [-1,0,1,0]
 
-                
-            
-    
-
-
-for tc in range(t):
-    n,w,h = map(int,input().split())
-    board3=[[] for i in range(w)]
-    
-    
-    for j in range(h):
+def dfs (boardtemp,n):
+    global W
+    global H
+    global ans
+    if n == 0:
         num = 0
-        for i in input().split(' '):
-            board3[num].append(int(i))
+        for i in range(W):
+            num += H - boardtemp[i].count(0)
+        ans.append(num)
+        return
+    if n ==3:
+        a=[2,3]
+    if n ==2:
+        a=[2,3]
+    if n == 1:
+        a = [6, 7]
+    for loc in range(W):
+        boards=copy.deepcopy(boardtemp)
+        boom=deque()
+        for Y in range(H):
+            if boards[loc][Y] > 0:
+                boom.append([loc,Y,boards[loc][Y]])
+                while(len(boom)!=0):
+                    cur = boom.popleft()
+                    
+                    for lenth in range(cur[2]-1):
+                        for dir in range(4):
+                            nx = cur[0]+dix[dir]*(lenth+1)
+                            ny = cur[1]+diy[dir]*(lenth+1)
+                            
+                            # print(cur,nx,ny)
+                            if nx >= W or nx<0 or ny >= H or ny<0:
+                                continue
+                            
+                            if boards[nx][ny]>0:
+                                boom.append([nx,ny,boards[nx][ny]])
+                    boards[cur[0]][cur[1]] = 0
+
+                break
+        for i in range(W):
+                    for j in range(1,H):
+                        if boards[i][j]==0:
+                            boards[i].pop(j)
+                            boards[i].insert(0,0)
+        
+
+        dfs(boards, n-1)
+
+T = int(input())
+for t in range(T):
+    N,W,H = map(int,input().split())
+    ans=[]
+    board=[[] for i in range(W)]
+    for j in range(H):
+        num = 0
+        for i in input().split():
+            board[num].append(int(i))
             num+=1
-    dfs(board3,n)
-    # print(ans)
-
-    
-
-    
-    # print(board)
+    dfs(board, N)
+    print('#',t+1,' ',min(ans),sep='')
