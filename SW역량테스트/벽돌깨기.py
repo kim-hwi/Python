@@ -15,8 +15,8 @@ def dfs (boardtemp,n):
         ans.append(num)
         return
     for loc in range(W):
-        boards=copy.deepcopy(boardtemp)
-        boom=deque()
+        boards=copy.deepcopy(boardtemp) #2차원 배열이기 때문에 deepcopy사용
+        boom=deque() 
         for Y in range(H):
             if boards[loc][Y] > 0:
                 boom.append([loc,Y,boards[loc][Y]])
@@ -26,9 +26,8 @@ def dfs (boardtemp,n):
                     for lenth in range(cur[2]-1):
                         for dir in range(4):
                             nx = cur[0]+dix[dir]*(lenth+1)
-                            ny = cur[1]+diy[dir]*(lenth+1)
+                            ny = cur[1]+diy[dir]*(lenth+1) #상좌하우 순으로 + 하나씩 더 넓어지는 과정
                             
-                            # print(cur,nx,ny)
                             if nx >= W or nx<0 or ny >= H or ny<0:
                                 continue
                             
@@ -36,7 +35,7 @@ def dfs (boardtemp,n):
                                 boom.append([nx,ny,boards[nx][ny]])
                     boards[cur[0]][cur[1]] = 0
 
-                break
+                break # 첫번째 열에서 벽돌을 만나면 다음 돌을 처리하지않음
         for i in range(W):
                     for j in range(1,H):
                         if boards[i][j]==0:
@@ -44,7 +43,7 @@ def dfs (boardtemp,n):
                             boards[i].insert(0,0)
         
 
-        dfs(boards, n-1)
+        dfs(boards, n-1) # 다음단계 실행
 
 T = int(input())
 for t in range(T):
