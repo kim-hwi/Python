@@ -14,12 +14,6 @@ def dfs (boardtemp,n):
             num += H - boardtemp[i].count(0)
         ans.append(num)
         return
-    if n ==3:
-        a=[2,3]
-    if n ==2:
-        a=[2,3]
-    if n == 1:
-        a = [6, 7]
     for loc in range(W):
         boards=copy.deepcopy(boardtemp)
         boom=deque()
