@@ -33,7 +33,7 @@ for t in range(T):
             vis[i][j] = 1
             if board[i][j] != 0:
                 count+=1
-            if count*M >= 1*1:
+            if count*M >= 1*1:#엣지케이스
                 ans = max(ans, count)
             for K in range(k):
                 while len(qu) != 0:
