@@ -110,6 +110,7 @@ for t in range(T):
 
                     nx = nx+dix[dir]
                     ny = ny+diy[dir]
+                    
                     print(board[nx][ny],dir,nx,ny,start)
                     print()   
                     
