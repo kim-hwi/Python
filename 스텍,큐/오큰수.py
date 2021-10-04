@@ -3,7 +3,7 @@ st=[]
 res = [-1 for i in range(N)]
 loc =0
 board = [int(num) for num in input().split()]
-print(board)
+# print(board)
 st.append(0)
 i=1
 while st and i<N:

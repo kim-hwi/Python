@@ -12,6 +12,6 @@ while len(qu) >1:
         print(qu[0])
         exit(0)
     qu.append(qu.popleft())
-print(qu[0],'/')
+print(qu[0])
 
 
