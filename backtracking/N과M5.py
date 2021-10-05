@@ -46,7 +46,7 @@ for i in range(t):
     dfs(i, vis, r)
 # a = set( [[1,1],[21,1]])
 a = set(map(' '.join, ans))
-a = list(map(int,list(a)))
+a = map(int,list(a))
 a.sort()
 for i in range(len(a)):
     print(a[i])
