@@ -2,39 +2,27 @@ import itertools
 
 
 def solution(relation):
-    # print(relation)
-    ans = [i for i in range(len(relation[0]))]
-    count = 0
-    print(ans)
+    ans = []
+    sch = [i for i in range(len(relation[0]))]
+    for i in range(1, len(relation[0])+1):
+        li = list(map(list, itertools.combinations(sch, i)))
+        for j in li:
+            temp = []
+            for q in relation:
+                temp2 = ''
+                for l in j:
+                    temp2 += q[l]
+                temp.append(temp2)
 
-    # print(result)
-    for num in range(1, len(relation[0])+1):
-        result = list(itertools.combinations(ans, num))
-        # print(result)
-        arr = ['' for i in range(len(relation))]
-        for tup in result:
-
-            for tup2 in tup:
-                # print(tup2,end=' ')
-                for i in range(len(relation)):
-                    arr[i] += relation[i][tup2]
-            if len(set(arr)) == len(relation):
-                print(arr, len(set(arr)), len(relation))
-                if tup2 in ans:
-                    ans.remove(tup2)
-                count += 1
-            arr = ['' for i in range(len(relation))]
-            # arr.clear()
-
-    #     for tup in range(1,num+1):
-    #         print(tup,end=' ')
-    #     print()
-    #     for i in relation:
-    #     ans.append(i[0])
-    # print(len(set(ans)))
-    return count
-
-
-arr = [["400", "con", "music", "2"], ["200", "apeach", "math", "2"], ["300", "tube", "computer", "3"], [
-    "400", "con", "music", "4"], ["500", "muzi", "music", "3"], ["600", "apeach", "music", "2"]]
-print(solution(arr))
+            lenli = len(set(temp))
+            if lenli == len(temp):
+                flag = True
+                for an in ans:
+                    # print(an,j,ans)
+                    # print(an,sorted(list(set(an)&set(j))))
+                    if an == sorted(list(set(an) & set(j))):
+                        flag = False
+                        break
+                if flag == True:
+                    ans.append(j)
+    return len(ans)
