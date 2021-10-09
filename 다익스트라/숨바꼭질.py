@@ -46,3 +46,40 @@ dp=dij(1)
 max_dp = max(dp[1:])
 print(dp.index(max_dp), max_dp, dp.count(max_dp))
 
+
+
+
+dic = {[] for i in range(n+1)}
+
+
+
+def dj(start):
+    dp = [1000000 for i in range(n)]
+    heap = []
+    heappush(heap,[0,start])
+    dp[start] = 0
+    while heap:
+        we,loc = heappop(heap)
+        for _we,_loc in dic[loc]:
+            wei = we+_we
+            if wei < dp[_loc]:
+                dp[_loc]=wei
+                heappush(heap,[loc,wei])
+    return dp
+
+
+def dij(start):
+    heap = []
+    heappush(heap, [0, start])
+    dp = [100000000 for i in range(n+1)]
+    dp[start] = 0
+    while heap:
+        we, loc = heappop(heap)
+        for n_loc, n_we in dic[loc]:
+            wie = we+n_we
+            if dp[n_loc] > wie:
+                dp[n_loc] = wie
+                heappush(heap, [wie, n_loc])
+    return dp
+
+dj(1)
