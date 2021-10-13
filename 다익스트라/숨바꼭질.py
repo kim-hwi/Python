@@ -11,6 +11,59 @@ for i in range(m):
     dic[b].append([a,1])
 # print(dic)
 
+
+def di(start):
+    dp = [10000 for i in range(n+1)]
+    dp[start] = 0
+    heap = []
+    heappush(heap, [0, start])
+    while heap:
+        we, loc = heappop(heap)
+        for _loc,_we in dic[loc]:
+            wei = _we+we
+            if dp[_loc] > wei:
+                dp[_loc] = wei
+                heappush(heap, [wei, _loc])
+    return dp
+
+
+
+
+
+
+
+def d(start):
+    heap=[]
+    dp=[100000 for i in range(n+1)]
+    dp[start] = 0
+    heappush(heap,[0,start])
+    while heap:
+        we,loc = heappop(heap)
+        for _loc,_we in dic[loc]:
+            wei = _we+we
+            if wei < dp[_loc]:
+                dp[_loc] = wei
+                heappush(heap,[wei,_loc])
+    return dp
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # 딕셔너리를 이용한 풀이 -> 노드가 번호가 아니더라도 풀 수가 있다.
 def dij (start): 
     heap=[]
@@ -42,44 +95,12 @@ def dij (start):
 #                 heappush(heap, [wei, n_nu])
 #     return dp
 
-dp=dij(1)
+dp=d(1)
 max_dp = max(dp[1:])
 print(dp.index(max_dp), max_dp, dp.count(max_dp))
 
+dic = {i:[] for i in range(n+1)}
 
 
 
-dic = {[] for i in range(n+1)}
 
-
-
-def dj(start):
-    dp = [1000000 for i in range(n)]
-    heap = []
-    heappush(heap,[0,start])
-    dp[start] = 0
-    while heap:
-        we,loc = heappop(heap)
-        for _we,_loc in dic[loc]:
-            wei = we+_we
-            if wei < dp[_loc]:
-                dp[_loc]=wei
-                heappush(heap,[loc,wei])
-    return dp
-
-
-def dij(start):
-    heap = []
-    heappush(heap, [0, start])
-    dp = [100000000 for i in range(n+1)]
-    dp[start] = 0
-    while heap:
-        we, loc = heappop(heap)
-        for n_loc, n_we in dic[loc]:
-            wie = we+n_we
-            if dp[n_loc] > wie:
-                dp[n_loc] = wie
-                heappush(heap, [wie, n_loc])
-    return dp
-
-dj(1)
