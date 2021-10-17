@@ -36,6 +36,7 @@ while len(fqu) != 0 and len(jqu) != 0:
             exit(0)
         board[jnx][jny] = 'J'
         jqu.append([jnx,jny])
+        
     F = fqu.popleft()
     for i in range(4):
         fnx = dix[i]+F[0]
