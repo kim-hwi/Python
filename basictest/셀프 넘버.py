@@ -14,3 +14,5 @@ for i in arr:
     arr2.remove(i)
 for i in range(len(arr2)):
     print(arr2[i])
+
+    
